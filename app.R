@@ -14,14 +14,9 @@ library(Cairo)
 library(ggplot2)
 library(caret)
 library(cluster)
-library(fpc)
 library(rpart)
-library(factoextra)
-library(RCurl)
-library(gridExtra)
-library(reshape2)
 library(gbm)
-library(DT)
+
 
 
 #get data set up
