@@ -32,14 +32,14 @@ selectedData<-na.omit(selectedData)
 ui <- (fluidPage(
     navbarPage("Final Project",
         tabPanel('Test Information',  textOutput("testinfo")), 
-        tabPanel("Data and Modeling Infromation", textOutput("datainfo"), 
+        tabPanel("Data and Modeling Information", textOutput("datainfo"), 
                  uiOutput('ex1')),
         tabPanel('Data Exploration', sidebarLayout(
             sidebarPanel(
                 h3("Select the knife Brand:"),
                 selectizeInput("Brand", "Brand", selected = "Spyderco", choices = levels(as.factor(finaldata$Brand))),
                 checkboxInput("Steel", h4("Color Code by Steel Type")),
-                h3("Download the show plot:"),
+                h3("Download the shown plot:"),
                 downloadButton("export", "Download"),),
                 mainPanel(plotOutput("KnifePlot", click = "plot1_click"), fluidRow(
                     column(width = 6,
@@ -89,7 +89,7 @@ ui <- (fluidPage(
                 h3("Download the shown table:"),
                 downloadButton("downloadData", "Download"),
                 tags$div(class="header", checked=NA,
-                  tags$p("If you would link to look at all the data then,"),
+                  tags$p("If you would like to look at all the data then,"),
                   tags$a(href="https://docs.google.com/spreadsheets/d/1b_rNfdJnL9oyn-JoL9yUHhUmDLAP1hJ1dN_0q5G4tug/htmlview#", "Click Here!")
                 )
             ),mainPanel( 
@@ -139,11 +139,11 @@ output$Clusterplot <- renderPlot({
     
 #text for model info
 output$testinfo<- renderText({
-  paste("The purpose of this is app is to allow users to investigate cut test from various knife brands.  The data used in this app has been collected from a spreadsheet created by YouTube channel creator Cedric and Ada, there is a link to his data on the Data Table tab.  To create this data Pete (owner of Cedric and Ada channel) uses a knife to cut 10mm twisted sisal rope until it no longer reliably cut a sheet of printed paper.  This test is intended to display the edge holding of the steel the edge of the knife is made of.")})
+  paste("The purpose of this is app is to allow users to investigate cut test from various knife brands.  The data used in this app has been collected from a spreadsheet created by YouTube channel creator Cedric and Ada, there is a link to his data on the Data Table tab.  To create this data Pete (owner of Cedric and Ada channel) uses a knife to cut 10mm twisted sisal rope.  Every so often stop to test the edge holding on a sheet of printer paper.  He does this until it no longer reliably cuts a sheet of printed paper.  This test is intended to display the edge holding of the steel the edge of the knife is made of.")})
 
 #text for data info
 output$datainfo<- renderText({  
-  ("There are many variables that goes into the edge holding of a steel and Pete does a good job of documenting most of these variables, like brand, knife, steel type, type of sharpener used, the style of sharpening, edge angle, number of cuts and many other.  For this app I will only be using a few of them though.  They will be brand, knife, steel type, edge angle, sharpener and number of cuts.  These were chosen for now because they are consistently available for most tests and do a good job of explaining the data.  I would like to include variables like HRC and behind the edge thickness, but since they are not available for many of the knives, I will leave it out.  In this app users will be able to look at the data and graphs for a given brand of knife and look at two different types of predictive modeling for the number of cuts a blade will do based on the given variables earlier.  The first model is a glm model with Cuts=Brand + Sharpener + Steel:Edge.angle + Brand:Edge.angle + Brand:Steel.  The second is a boosted tree model with using jjust Brand, Sharpener, Steel and Edge Angle to predict Cuts.")
+  ("There are many variables that go into the edge holding of a steel and Pete does a good job of documenting most of these variables, like brand, knife, steel type, type of sharpener used, the style of sharpening, edge angle, number of cuts and many other jvariables.  For this app I will only be using a few of them though.  They will be brand, knife, steel type, edge angle, sharpener and number of cuts.  These were chosen for now because they are consistently available for most tests and do a good job of explaining the data.  I would like to include variables like HRC and behind the edge thickness, but since they are not available for many of the knives, I will leave it out.  In this app users will be able to look at the data and graphs for a given brand of knife and look at two different types of predictive modeling for the number of cuts a blade will do based on the given variables earlier.  The first model is a glm model with Cuts=Brand + Sharpener + Steel:Edge.angle + Brand:Edge.angle + Brand:Steel.  The second is a boosted tree model with using just Brand, Sharpener, Steel and Edge Angle to predict Cuts.")
 })
 
 #set up click info
